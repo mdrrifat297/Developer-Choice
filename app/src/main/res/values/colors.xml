@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#7A7A7A</color>
+    <color name="background">#0044AA</color>
+    <color name="bluelight">#449DEF</color>
+    <color name="bluedark">#2F6699</color>
+    <color name="greenlight">#70C656</color>
+    <color name="greendark">#53933F</color>
+    <color name="orangelight">#F3AE1B</color>
+    <color name="orangedark">#BB6008</color>
+    <color name="black">#000000</color>
+
+    <!-- Primary Colors -->
+    <color name="colorPrimary">#FF5F6D</color> <!-- Soft Red -->
+    <color name="colorPrimaryDark">#FFC371</color> <!-- Light Peach -->
+    <color name="colorAccent">#42A5F5</color> <!-- Blue Accent -->
+
+    <!-- Background Colors -->
+    <color name="colorBackground">#F9F9F9</color> <!-- Light Gray Background -->
+    <color name="colorWhite">#FFFFFF</color> <!-- White Color -->
+
+    <!-- Text Colors -->
+    <color name="colorPrimaryText">#333333</color> <!-- Dark Gray Text for better readability -->
+    <color name="colorSecondaryText">#757575</color> <!-- Lighter Gray Text -->
+
+    <!-- Button and CardView -->
+    <color name="buttonBackground">#FF5F6D</color> <!-- Button Background (Primary Color) -->
+    <color name="cardViewBackground">#FFFFFF</color> <!-- CardView Background (White) -->
+    <color name="cardViewShadow">#40000000</color> <!-- Shadow Color for CardView -->
+
+    <!-- Status Bar Color -->
+    <color name="statusBarColor">#FF5F6D</color> <!-- Matching the primary color for the status bar -->
+
 </resources>
