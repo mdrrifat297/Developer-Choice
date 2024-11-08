@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,7 @@
     tools:context=".LoginActivity">
 
     <!-- CardView for Login Form -->
-    <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
         android:id="@+id/loginCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +18,7 @@
         android:layout_margin="16dp"
         android:backgroundTint="@android:color/white"
         android:elevation="12dp"
-        app:cardCornerRadius="24dp">
+        app:cardCornerRadius="24dp">  <!-- This is where app namespace is used -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,17 +96,17 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    <!-- Sign Up Link at the bottom of the screen -->
-    <TextView
-        android:id="@+id/signUpText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:text="Don’t have an account? Sign Up"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp" />
-</RelativeLayout>
+            <!-- Sign Up Link at the bottom of the screen -->
+        <TextView
+            android:id="@+id/signUpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:text="Don’t have an account? Sign Up"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp" />
+    </RelativeLayout>
