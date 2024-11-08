@@ -58,7 +58,6 @@
                 android:inputType="textEmailAddress"
                 android:padding="14dp"
                 android:background="@drawable/rounded_edittext"
-                android:drawableLeft="@drawable/ic_email"
                 android:drawablePadding="10dp"
                 android:layout_marginBottom="16dp" />
 
@@ -71,7 +70,6 @@
                 android:inputType="textPassword"
                 android:padding="14dp"
                 android:background="@drawable/rounded_edittext"
-                android:drawableLeft="@drawable/ic_password"
                 android:drawablePadding="10dp"
                 android:layout_marginBottom="24dp" />
 
