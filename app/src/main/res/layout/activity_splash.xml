@@ -10,6 +10,7 @@
         android:layout_height="160dp"
         android:layout_centerInParent="true"
         android:src="@drawable/app_logo"
+        android:background="@drawable/circle_background"
         android:contentDescription="@string/app_name"
         android:elevation="8dp"
         android:alpha="0.9" />

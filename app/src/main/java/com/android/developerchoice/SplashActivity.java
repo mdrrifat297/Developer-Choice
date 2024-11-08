@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Intent to open main activity
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish();
             }
         }, 3000); // Delay for 3 seconds
