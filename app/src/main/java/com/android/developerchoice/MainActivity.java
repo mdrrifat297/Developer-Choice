@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,13 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 int itemID =  item.getItemId();
 
                 if (itemID == R.id.drawerAccount) {
-                    Toast.makeText(MainActivity.this, "Account", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, AccountActivity.class));
                 } else if (itemID == R.id.drawerSQLite) {
                     startActivity(new Intent(MainActivity.this, SQLiteActivity.class));
                 } else if (itemID == R.id.drawerWebsite) {
                     startActivity(new Intent(MainActivity.this, WebsiteActivity.class));
                 } else if (itemID == R.id.drawerLogout) {
                     Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
 
                 drawerLayout.close();

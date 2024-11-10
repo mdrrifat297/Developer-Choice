@@ -1,5 +1,6 @@
 package com.android.developerchoice;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -32,6 +33,28 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Future implementation for database upgrades
+        // Drop the old table if it exists
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DATA);
+
+        // Recreate the table
+        onCreate(db);
     }
+
+    public void insertData(String name, String email, String password) {
+        // Open the database for writing
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Create a new ContentValues object to hold the data
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, name);        // Insert the name
+        values.put(KEY_EMAIL, email);      // Insert the email
+        values.put(KEY_PASSWORD, password); // Insert the password
+
+        // Insert the new row into the table
+        db.insert(TABLE_DATA, null, values);
+
+        // Close the database connection
+        db.close();
+    }
+
 }

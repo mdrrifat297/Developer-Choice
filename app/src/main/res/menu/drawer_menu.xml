@@ -11,7 +11,7 @@
     <group android:id="@+id/groutTwo">
         <item
             android:id="@+id/drawerSQLite"
-            android:title="Logout"
+            android:title="SQLite"
             android:icon="@drawable/dataset_icon"/>
     </group>
 
