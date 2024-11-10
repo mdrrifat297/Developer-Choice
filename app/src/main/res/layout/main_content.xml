@@ -6,10 +6,11 @@
 
     <Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:background="@color/bluelight">
         
         <ImageButton
+            android:id="@+id/openNavigation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/three_line_icon"
