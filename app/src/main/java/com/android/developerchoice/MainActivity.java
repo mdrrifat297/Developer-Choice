@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (itemID == R.id.drawerAccount) {
                     Toast.makeText(MainActivity.this, "Account", Toast.LENGTH_SHORT).show();
+                } else if (itemID == R.id.drawerSQLite) {
+                    startActivity(new Intent(MainActivity.this, SQLiteActivity.class));
                 } else if (itemID == R.id.drawerWebsite) {
                     startActivity(new Intent(MainActivity.this, WebsiteActivity.class));
                 } else if (itemID == R.id.drawerLogout) {
