@@ -1,10 +1,16 @@
 package com.android.developerchoice;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -12,6 +18,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,6 +28,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final String CHANNEL_ID = "example_channel_id";
+    private final int NOTIFICATION_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton openNavigation = findViewById(R.id.openNavigation);
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         NavigationView  navigationView = findViewById(R.id.navigationView);
+        Button openNotification = findViewById(R.id.openNotification);
 
 
         // open  navigation drawer
@@ -47,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.open();
             }
         });
+
+        openNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNotification();
+            }
+        });
+
 
         // navigation item selected
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -73,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // logout confram dialog
     private void showConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation");
@@ -114,4 +134,43 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
+    private void createNotificationChannel() {
+        // Only create a channel on Android 8.0 (API level 26) and higher
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Example Channel";
+            String description = "This is a description of the example channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            // Register the channel with the system
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+    }
+
+    private void showNotification() {
+        // Create an intent to open MainActivity when the notification is tapped
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Build the notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.app_logo_circle) // Replace with your app's icon
+                .setContentTitle("Hello, World!")
+                .setContentText("This is a notification example.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true); // Dismiss notification when tapped
+
+        // Show the notification
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager != null) {
+            notificationManager.notify(NOTIFICATION_ID, builder.build());
+        }
+    }
 }
