@@ -5,6 +5,8 @@
     android:orientation="vertical">
 
     <!-- Updated Toolbar to use androidx namespace -->
+
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,8 +16,29 @@
             android:id="@+id/openNavigation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/three_line_icon"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:src="@drawable/three_line_icon" />
+
     </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -8,11 +8,17 @@
             android:icon="@drawable/account_icon"/>
     </group>
 
+
     <group android:id="@+id/groutTwo">
         <item
             android:id="@+id/drawerSQLite"
             android:title="SQLite"
             android:icon="@drawable/dataset_icon"/>
+
+        <item
+            android:id="@+id/drawerSensor"
+            android:title="Sensor"
+            android:icon="@drawable/sensor_icon"/>
     </group>
 
     <group android:id="@+id/groupThree">

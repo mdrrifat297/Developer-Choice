@@ -1,5 +1,6 @@
 package com.android.developerchoice;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -56,14 +58,12 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, AccountActivity.class));
                 } else if (itemID == R.id.drawerSQLite) {
                     startActivity(new Intent(MainActivity.this, SQLiteActivity.class));
+                } else if (itemID == R.id.drawerSensor) {
+                    startActivity(new Intent(MainActivity.this, SensorActivity.class));
                 } else if (itemID == R.id.drawerWebsite) {
                     startActivity(new Intent(MainActivity.this, WebsiteActivity.class));
                 } else if (itemID == R.id.drawerLogout) {
-                    Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                    showConfirmationDialog();
                 }
 
                 drawerLayout.close();
@@ -71,4 +71,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation");
+        builder.setMessage("Are you sure you want to log out?");
+
+        // Set up the "Yes" button
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Code to execute when "Yes" is pressed
+                Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        // Set up the "No" button
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Code to execute when "No" is pressed
+                dialog.dismiss();
+            }
+        });
+
+        // Add a "Dismiss" button
+        builder.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); // Close the dialog when clicked
+            }
+        });
+
+        // Make the dialog not cancelable by tapping outside
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);  // Prevent dismissing by tapping outside
+        dialog.show();
+    }
+
 }

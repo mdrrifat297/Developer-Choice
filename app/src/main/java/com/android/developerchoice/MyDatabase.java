@@ -57,4 +57,8 @@ public class MyDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void getData() {
+        // select quare
+    }
+
 }
