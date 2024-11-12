@@ -16,6 +16,7 @@
             android:id="@+id/openNavigation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:background="@android:color/transparent"
             android:src="@drawable/three_line_icon" />
 
@@ -29,13 +30,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginTop="200dp">
+            android:layout_marginTop="200dp"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/openNotification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Open Nofification"/>
+
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </ScrollView>
 

@@ -19,6 +19,19 @@
             android:id="@+id/drawerSensor"
             android:title="Sensor"
             android:icon="@drawable/sensor_icon"/>
+
+        <item
+            android:id="@+id/drawerCamera"
+            android:title="Camera"
+            android:icon="@drawable/camera_icon"/>
+    </group>
+
+    <group android:id="@+id/Five">
+        <item
+            android:id="@+id/drawerAds"
+            android:title="Ads"
+            android:icon="@drawable/ads_click_icon"/>
+
     </group>
 
     <group android:id="@+id/groupThree">

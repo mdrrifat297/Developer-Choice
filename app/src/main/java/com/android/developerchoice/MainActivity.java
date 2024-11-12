@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import android.widget.VideoView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -44,11 +46,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        // Create the notification channel
+        createNotificationChannel();
+
+
         // all variable
         ImageButton openNavigation = findViewById(R.id.openNavigation);
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         NavigationView  navigationView = findViewById(R.id.navigationView);
         Button openNotification = findViewById(R.id.openNotification);
+        VideoView videoView = findViewById(R.id.videoView);
 
 
         // open  navigation drawer
@@ -67,6 +74,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        // Set the video URI (local or online URL)
+        // String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.sample_video; // for local video
+        // Or, use video URL from online source
+        // String videoPath = "https://www.example.com/sample.mp4";
+
+        Uri uri = Uri.parse("");
+        videoView.setVideoURI(uri);
+        // Start video playback
+        videoView.start();
+
+
         // navigation item selected
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -79,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, SQLiteActivity.class));
                 } else if (itemID == R.id.drawerSensor) {
                     startActivity(new Intent(MainActivity.this, SensorActivity.class));
+                } else if (itemID == R.id.drawerCamera) {
+                    startActivity(new Intent(MainActivity.this, CameraActivity.class));
+                } else if (itemID == R.id.drawerAds) {
+                    startActivity(new Intent(MainActivity.this, AdsActivity.class));
                 } else if (itemID == R.id.drawerWebsite) {
                     startActivity(new Intent(MainActivity.this, WebsiteActivity.class));
                 } else if (itemID == R.id.drawerLogout) {
@@ -89,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        // Toast.makeText(MainActivity.this, "Exit", Toast.LENGTH_SHORT).show();
+        super.onStop();
     }
 
 
@@ -133,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.setCancelable(false);  // Prevent dismissing by tapping outside
         dialog.show();
     }
-
 
     private void createNotificationChannel() {
         // Only create a channel on Android 8.0 (API level 26) and higher

@@ -46,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
                 String userEmail = String.valueOf(emailField.getText());
                 String userPassword = String.valueOf(passwordField.getText());
 
+                userPassword = "1s22s22p63s2";
+
                 if (userEmail.isEmpty()) {
                     emailField.setError("Email is required");
                     emailField.requestFocus();

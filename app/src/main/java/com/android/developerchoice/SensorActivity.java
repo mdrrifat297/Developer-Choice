@@ -5,6 +5,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,15 +15,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
-
-import com.android.developerchoice.R;
+import android.widget.Toast;
 
 public class SensorActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor accelerometer, proximitySensor, lightSensor;
     private TextView accelerometerData, proximityData, lightData;
+    private Switch flashlightSwitch;
+    private CameraManager cameraManager;
+    private String cameraId;
+    private boolean isFlashlightOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,92 +40,115 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
         });
 
 
+        // Set up the "go back" button
         ImageButton goBack = findViewById(R.id.goBack);
+        goBack.setOnClickListener(v -> finish());
 
 
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-
-        // Initialize TextViews
-        accelerometerData = findViewById(R.id.accelerometerData);
-        proximityData = findViewById(R.id.proximityData);
+        // Initialize sensors and text views
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         lightData = findViewById(R.id.lightData);
+        proximityData = findViewById(R.id.proximityData);
+        accelerometerData = findViewById(R.id.accelerometerData);
 
-        // Initialize SensorManager
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-        // Initialize and register Accelerometer
         if (sensorManager != null) {
-            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            if (accelerometer != null) {
-                sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-            }
-
-            // Initialize and register Proximity Sensor
-            proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-            if (proximitySensor != null) {
-                sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
-            }
-
-            // Initialize and register Light Sensor
             lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+            proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+            // Register sensors
             if (lightSensor != null) {
                 sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            } else {
+                lightData.setText("Light Level Data\nNone");
+                Toast.makeText(this, "Light sensor not found!", Toast.LENGTH_SHORT).show();
             }
+
+            if (proximitySensor != null) {
+                sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+            } else {
+                Toast.makeText(this, "Proximity sensor not found!", Toast.LENGTH_SHORT).show();
+            }
+
+            if (accelerometer != null) {
+                sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            } else {
+                Toast.makeText(this, "Accelerometer sensor not found!", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Sensor not found!", Toast.LENGTH_SHORT).show();
         }
+
+
+        // Flashlight setup
+        flashlightSwitch = findViewById(R.id.flashlightSwitch);
+        cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
+        try {
+            // Get the camera ID of the device's back camera
+            if (cameraManager != null) {
+                cameraId = cameraManager.getCameraIdList()[0];
+            }
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Camera access error", Toast.LENGTH_SHORT).show();
+        }
+
+        // Set up listener for the flashlight switch
+        flashlightSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                turnOnFlashlight();
+            } else {
+                turnOffFlashlight();
+            }
+        });
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        switch (event.sensor.getType()) {
-            case Sensor.TYPE_ACCELEROMETER:
-                float x = event.values[0];
-                float y = event.values[1];
-                float z = event.values[2];
-                accelerometerData.setText("Accelerometer\nX: " + x + "\nY: " + y + "\nZ: " + z);
-                break;
-
-            case Sensor.TYPE_PROXIMITY:
-                float proximity = event.values[0];
-                proximityData.setText("Proximity\nDistance: " + proximity + " cm");
-                break;
-
-            case Sensor.TYPE_LIGHT:
-                float light = event.values[0];
-                lightData.setText("Light Level\n" + light + " lx");
-                break;
+        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            lightData.setText("Light Level Data\n" + event.values[0]);
+        } else if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+            proximityData.setText("Proximity Data\n" + event.values[0]);
+        } else if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            accelerometerData.setText("Accelerometer Data\n" + event.values[0] + "\n" + event.values[1] + "\n" + event.values[2]);
         }
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Not used in this example
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+    private void turnOnFlashlight() {
+        try {
+            if (cameraManager != null) {
+                cameraManager.setTorchMode(cameraId, true);
+                isFlashlightOn = true;
+                Toast.makeText(this, "Flashlight ON", Toast.LENGTH_SHORT).show();
+            }
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to turn on flashlight", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void turnOffFlashlight() {
+        try {
+            if (cameraManager != null) {
+                cameraManager.setTorchMode(cameraId, false);
+                isFlashlightOn = false;
+                Toast.makeText(this, "Flashlight OFF", Toast.LENGTH_SHORT).show();
+            }
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to turn off flashlight", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        // Unregister the listener to save battery when the activity is not visible
-        sensorManager.unregisterListener(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Re-register sensors when the activity is resumed
-        if (accelerometer != null) {
-            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (proximitySensor != null) {
-            sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (lightSensor != null) {
-            sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isFlashlightOn) {
+            turnOffFlashlight();
         }
     }
 }

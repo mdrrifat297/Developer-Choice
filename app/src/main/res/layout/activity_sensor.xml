@@ -22,6 +22,7 @@
 
 
     <LinearLayout
+        android:id="@+id/sensorLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
@@ -49,6 +50,29 @@
             android:layout_height="wrap_content"
             android:text="Light Level Data"
             android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tourchLight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:padding="20dp"
+            android:text="Turn on/off your flash light"/>
+
+        <Switch
+            android:id="@+id/flashlightSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flash light" />
     </LinearLayout>
 
 
