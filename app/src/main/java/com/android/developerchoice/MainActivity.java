@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         NavigationView  navigationView = findViewById(R.id.navigationView);
         Button openNotification = findViewById(R.id.openNotification);
-        VideoView videoView = findViewById(R.id.videoView);
 
 
         // open  navigation drawer
@@ -74,17 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 showNotification();
             }
         });
-
-
-        // Set the video URI (local or online URL)
-        // String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.sample_video; // for local video
-        // Or, use video URL from online source
-        // String videoPath = "https://www.example.com/sample.mp4";
-
-        Uri uri = Uri.parse("");
-        videoView.setVideoURI(uri);
-        // Start video playback
-        videoView.start();
 
 
         // navigation item selected
@@ -122,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         // Toast.makeText(MainActivity.this, "Exit", Toast.LENGTH_SHORT).show();
         super.onStop();
     }
-
 
     // logout confram dialog
     private void showConfirmationDialog() {
@@ -166,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    // notification channel creat
     private void createNotificationChannel() {
         // Only create a channel on Android 8.0 (API level 26) and higher
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -183,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // show notification
     private void showNotification() {
         // Create an intent to open MainActivity when the notification is tapped
         Intent intent = new Intent(this, MainActivity.class);
