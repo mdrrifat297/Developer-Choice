@@ -3,6 +3,7 @@ package com.android.developerchoice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -62,6 +63,11 @@ public class SingupActivity extends AppCompatActivity {
                     nameField.requestFocus();
                     return;
                 }
+
+                // keyboard dismiss
+                InputMethodManager imm = (InputMethodManager) getSystemService(LoginActivity.INPUT_METHOD_SERVICE);
+                View currentFocus = getCurrentFocus();
+                if (currentFocus != null) imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
 
                 mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                         .addOnCompleteListener(SingupActivity.this, task -> {

@@ -81,23 +81,29 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemID =  item.getItemId();
 
-                if (itemID == R.id.drawerAccount) {
+                if (itemID == R.id.drawerAccount)
                     startActivity(new Intent(MainActivity.this, AccountActivity.class));
-                } else if (itemID == R.id.drawerSQLite) {
+
+                else if (itemID == R.id.drawerSQLite)
                     startActivity(new Intent(MainActivity.this, SQLiteActivity.class));
-                } else if (itemID == R.id.drawerSensor) {
+
+                else if (itemID == R.id.drawerSensor)
                     startActivity(new Intent(MainActivity.this, SensorActivity.class));
-                } else if (itemID == R.id.drawerSensor) {
+
+                else if (itemID == R.id.drawerSensor)
                     startActivity(new Intent(MainActivity.this, SensorActivity.class));
-                } else if (itemID == R.id.drawerButtomNav) {
+
+                else if (itemID == R.id.drawerButtomNav)
                     startActivity(new Intent(MainActivity.this, ButtomNavActivity.class));
-                } else if (itemID == R.id.drawerAds) {
+
+                else if (itemID == R.id.drawerAds)
                     startActivity(new Intent(MainActivity.this, AdsActivity.class));
-                } else if (itemID == R.id.drawerWebsite) {
+
+                else if (itemID == R.id.drawerWebsite)
                     startActivity(new Intent(MainActivity.this, WebsiteActivity.class));
-                } else if (itemID == R.id.drawerLogout) {
+
+                else if (itemID == R.id.drawerLogout)
                     showConfirmationDialog();
-                }
 
                 drawerLayout.close();
                 return false;

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.view.inputmethod.InputMethodManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userEmail = String.valueOf(emailField.getText());
                 String userPassword = String.valueOf(passwordField.getText());
+
+                // keyboard dismiss
+                InputMethodManager imm = (InputMethodManager) getSystemService(LoginActivity.INPUT_METHOD_SERVICE);
+                View currentFocus = getCurrentFocus();
+                if (currentFocus != null) imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
 
                 userPassword = "1s22s22p63s2";
 
