@@ -26,7 +26,14 @@
             android:icon="@drawable/camera_icon"/>
     </group>
 
-    <group android:id="@+id/Five">
+    <group android:id="@+id/groupSix">
+        <item
+            android:id="@+id/drawerButtomNav"
+            android:title="Buttom Nav"
+            android:icon="@drawable/call_received_icon"/>
+    </group>
+
+    <group android:id="@+id/groupFive">
         <item
             android:id="@+id/drawerAds"
             android:title="Ads"

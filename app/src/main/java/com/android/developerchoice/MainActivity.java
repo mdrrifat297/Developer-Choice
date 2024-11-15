@@ -28,6 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        FirebaseMessaging.getInstance().subscribeToTopic("App Info");
 
         // Create the notification channel
         createNotificationChannel();
@@ -97,8 +99,10 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, SQLiteActivity.class));
                 } else if (itemID == R.id.drawerSensor) {
                     startActivity(new Intent(MainActivity.this, SensorActivity.class));
-                } else if (itemID == R.id.drawerCamera) {
-                    startActivity(new Intent(MainActivity.this, CameraActivity.class));
+                } else if (itemID == R.id.drawerSensor) {
+                    startActivity(new Intent(MainActivity.this, SensorActivity.class));
+                } else if (itemID == R.id.drawerButtomNav) {
+                    startActivity(new Intent(MainActivity.this, ButtomNavActivity.class));
                 } else if (itemID == R.id.drawerAds) {
                     startActivity(new Intent(MainActivity.this, AdsActivity.class));
                 } else if (itemID == R.id.drawerWebsite) {
