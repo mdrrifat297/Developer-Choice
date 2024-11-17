@@ -1,6 +1,7 @@
 package com.android.developerchoice;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,10 @@ public class AdsActivity extends AppCompatActivity {
             return insets;
         });
 
+
+        // Set up the "go back" button
+        ImageButton goBack = findViewById(R.id.goBack);
+        goBack.setOnClickListener(v -> finish());
 
 
     }

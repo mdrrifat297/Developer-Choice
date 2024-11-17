@@ -34,9 +34,9 @@ android {
 
 dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:22.1.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:22.1.2")
-    implementation("com.google.firebase:firebase-auth")
+//    implementation("com.google.firebase:firebase-analytics:22.1.2")
+//    implementation("com.google.firebase:firebase-analytics-ktx:22.1.2")
+//    implementation("com.google.firebase:firebase-auth")
 
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.legacy.support.v4)
     implementation(libs.firebase.messaging)
+    // implementation(libs.play.services.ads)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

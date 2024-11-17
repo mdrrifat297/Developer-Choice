@@ -2,6 +2,7 @@ package com.android.developerchoice;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -37,10 +38,21 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                // check internet connecton
                 if (flag) {
-                    // Intent to open main activity
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                    finish();
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                    boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+                    // check login data
+                    if (isLoggedIn) {
+                        // login data is true
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
+                    } else {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 } else {
                     showConfirmationDialog();
                 }

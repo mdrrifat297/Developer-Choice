@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.android.developerchoice" />
-                  <option name="mobileSdkAppId" value="1:957470375710:android:684c6ee5c7962cc33f530f" />
-                  <option name="projectId" value="developer-choice" />
-                  <option name="projectNumber" value="957470375710" />
+                  <option name="mobileSdkAppId" value="1:924820206955:android:32d4d1a51eb5b67cd8882e" />
+                  <option name="projectId" value="developer-database-c2915" />
+                  <option name="projectNumber" value="924820206955" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

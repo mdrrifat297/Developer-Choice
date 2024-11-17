@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
@@ -28,6 +29,10 @@ public class CameraActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Set up the "go back" button
+        ImageButton goBack = findViewById(R.id.goBack);
+        goBack.setOnClickListener(v -> finish());
 
         capturedImageView = findViewById(R.id.capturedImageView);
         captureButton = findViewById(R.id.captureButton);

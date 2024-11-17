@@ -8,11 +8,20 @@
     android:orientation="vertical"
     tools:context=".AdsActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bluelight">
+        <ImageButton
+            android:id="@+id/goBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chevron_left_icon"
+            android:background="@android:color/transparent"/>
+    </androidx.appcompat.widget.Toolbar>
+
 <!--    <com.google.android.gms.ads.AdView-->
 <!--        android:id="@+id/adView"-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        ads:adSize="BANNER"-->
-<!--        ads:adUnitId="YOUR_AD_UNIT_ID"/>-->
-
+<!--        android:layout_height="wrap_content" />-->
 </LinearLayout>

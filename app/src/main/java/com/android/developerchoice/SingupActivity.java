@@ -1,6 +1,7 @@
 package com.android.developerchoice;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -75,7 +76,14 @@ public class SingupActivity extends AppCompatActivity {
                                 // User creation success
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(SingupActivity.this, "User created successfully!", Toast.LENGTH_SHORT).show();
-                                // Navigate to another activity if needed
+
+                                // save the login data
+                                SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean("isLoggedIn", true); // ব্যবহারকারী লগইন করেছে
+                                editor.apply();
+
+                                // navigate to main activity
                                 Intent intent = new Intent(SingupActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();

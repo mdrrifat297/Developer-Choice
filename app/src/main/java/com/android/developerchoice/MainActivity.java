@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -90,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 else if (itemID == R.id.drawerSensor)
                     startActivity(new Intent(MainActivity.this, SensorActivity.class));
 
-                else if (itemID == R.id.drawerSensor)
-                    startActivity(new Intent(MainActivity.this, SensorActivity.class));
+                else if (itemID == R.id.drawerCamera)
+                    startActivity(new Intent(MainActivity.this, CameraActivity.class));
 
                 else if (itemID == R.id.drawerButtomNav)
                     startActivity(new Intent(MainActivity.this, ButtomNavActivity.class));
@@ -127,7 +128,13 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Code to execute when "Yes" is pressed
+                // login information delate
+                SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isLoggedIn", false);
+                editor.apply();
+
+                // navigate the login activity
                 Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -149,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss(); // Close the dialog when clicked
+                dialog.dismiss();
             }
         });
 
