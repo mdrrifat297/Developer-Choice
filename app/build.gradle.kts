@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.legacy.support.v4)
     implementation(libs.firebase.messaging)
+    implementation(libs.firebase.database)
     // implementation(libs.play.services.ads)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

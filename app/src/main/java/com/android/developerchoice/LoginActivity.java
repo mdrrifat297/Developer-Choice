@@ -97,6 +97,9 @@ public class LoginActivity extends AppCompatActivity {
                                 // Sign-in failure
                                 Toast.makeText(LoginActivity.this, "Authentication failed: " + task.getException().getMessage(),
                                         Toast.LENGTH_SHORT).show();
+                                dismissProgressDialog();
+                                passwordField.setError("Incoret password");
+                                passwordField.requestFocus();
                             }
                         });
             }

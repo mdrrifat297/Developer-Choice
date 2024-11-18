@@ -15,10 +15,19 @@
 
         <ImageButton
             android:id="@+id/goBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="0dp"
             android:background="@android:color/transparent"
             android:src="@drawable/chevron_left_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_toolbar_title"
+            android:layout_gravity="center"
+            android:textSize="@dimen/toolbarTextSize"
+            android:textStyle="bold"/>
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -29,38 +38,142 @@
         android:gravity="center">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             app:cardCornerRadius="100dp">
 
             <ImageView
                 android:id="@+id/userPhoto"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:src="@drawable/account_icon"/>
+
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/userPhotoUplode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_photo"
+            android:layout_marginTop="10dp"
+            android:textStyle="italic"
+            android:textColor="@color/bluelight"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="30dp">
 
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/editUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                android:layout_marginTop="10dp"
+                android:textStyle="italic"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/bluelight"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:hint="Your Name"/>
+            android:text="- - - - - - - -"
+            android:textSize="20dp"/>
 
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Email"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/editUserEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                android:layout_marginTop="10dp"
+                android:textStyle="italic"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/bluelight"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:hint="Your Email"/>
+            android:text="- - - - - - - -"
+            android:textSize="20dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Date of birth"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/editUserDob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                android:layout_marginTop="10dp"
+                android:textStyle="italic"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/bluelight"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/userDob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- - - - - - - -"
+            android:textSize="20dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Location"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/editUserLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                android:layout_marginTop="10dp"
+                android:textStyle="italic"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/bluelight"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/userLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- - - - - - - -"
+            android:textSize="20dp"/>
 
     </LinearLayout>
 
@@ -75,6 +188,7 @@
             android:id="@+id/saveDataToDarabase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save Data"/>
+            android:text="@string/save_data"/>
     </LinearLayout>
+
 </LinearLayout>

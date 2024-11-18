@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbarTextSize">18sp</dimen>
+    <dimen name="toolbarTextMarginLeft">16dp</dimen>
+</resources>
