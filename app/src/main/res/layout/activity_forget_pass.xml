@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_singup"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/singup_background"
-    tools:context=".SingupActivity">
+    tools:context=".ForgetPassActivity">
 
     <!-- CardView for Login Form -->
     <androidx.cardview.widget.CardView
@@ -44,26 +44,12 @@
                 android:id="@+id/welcomeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome User!"
+                android:text="Forget your password"
                 android:textSize="22sp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/orangedark"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_marginBottom="24dp" />
-
-            <!-- Email Text Field -->
-            <EditText
-                android:id="@+id/nameField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter your name"
-                android:textColorHint="@color/black"
-                android:textColor="@color/black"
-                android:inputType="text"
-                android:padding="14dp"
-                android:background="@drawable/rounded_edittext"
-                android:drawablePadding="10dp"
-                android:layout_marginBottom="16dp" />
 
             <!-- Email Text Field -->
             <EditText
@@ -73,33 +59,21 @@
                 android:hint="Email your Address"
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
+                android:layout_marginTop="20dp"
                 android:inputType="textEmailAddress"
                 android:padding="14dp"
                 android:background="@drawable/rounded_edittext"
                 android:drawablePadding="10dp"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Password Text Field -->
-            <EditText
-                android:id="@+id/passwordField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter your password"
-                android:textColorHint="@color/black"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:padding="14dp"
-                android:background="@drawable/rounded_edittext"
-                android:drawablePadding="10dp"
-                android:layout_marginBottom="24dp" />
-
             <!-- Login Button -->
             <Button
-                android:id="@+id/singupButton"
+                android:id="@+id/sentEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sing Up"
+                android:text="Send Email"
                 android:textSize="16sp"
+                android:layout_marginTop="40dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="@android:color/white"
                 android:padding="14dp"
@@ -108,17 +82,15 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Sign Up Link at the bottom of the screen -->
     <TextView
-        android:id="@+id/loginText"
+        android:id="@+id/continueLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="Already have an account? Login"
-        android:textColor="@color/colorPrimaryDark"
+        android:text="Continue to login"
+        android:textColor="@color/colorBackground"
         android:textSize="14sp" />
-
 
 </LinearLayout>

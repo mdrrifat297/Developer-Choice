@@ -1,22 +1,27 @@
 package com.android.developerchoice;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class CameraActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int CAMERA_PERMISSION_CODE = 100;
+
     private ImageView capturedImageView;
     private Button captureButton;
 
@@ -24,20 +29,44 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        // Set up the "go back" button
-        ImageButton goBack = findViewById(R.id.goBack);
-        goBack.setOnClickListener(v -> finish());
-
+        // Initialize UI elements
         capturedImageView = findViewById(R.id.capturedImageView);
         captureButton = findViewById(R.id.captureButton);
+        ImageButton goBack = findViewById(R.id.goBack);
 
-        captureButton.setOnClickListener(v -> openCamera());
+        // Handle back button
+        goBack.setOnClickListener(v -> finish());
+
+        // Handle capture button
+        captureButton.setOnClickListener(v -> {
+            if (checkCameraPermission()) {
+                openCamera();
+            } else {
+                requestCameraPermission();
+            }
+        });
+    }
+
+    private boolean checkCameraPermission() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestCameraPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void openCamera() {
@@ -53,11 +82,14 @@ public class CameraActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // Retrieve the thumbnail image from the data
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            capturedImageView.setImageBitmap(imageBitmap);
+            if (imageBitmap != null) {
+                capturedImageView.setImageBitmap(imageBitmap);
+            } else {
+                Toast.makeText(this, "No image data received", Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(this, "Failed to capture image", Toast.LENGTH_SHORT).show();
         }

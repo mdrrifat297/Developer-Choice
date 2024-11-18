@@ -13,7 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -102,6 +105,28 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
                 turnOffFlashlight();
             }
         });
+
+        // vibrator button
+        Button vidrateButton = findViewById(R.id.vidrateButton);
+
+        vidrateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+                if (vibrator != null) {
+                    // For devices running Android O (API level 26) and above
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        VibrationEffect effect = VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE);
+                        vibrator.vibrate(effect);
+                    } else {
+                        // For older versions
+                        vibrator.vibrate(100);
+                    }
+                }
+            }
+        });
+
     }
 
     @Override

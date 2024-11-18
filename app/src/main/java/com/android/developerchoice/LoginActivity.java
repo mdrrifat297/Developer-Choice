@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView displayTextView;
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +58,6 @@ public class LoginActivity extends AppCompatActivity {
                 View currentFocus = getCurrentFocus();
                 if (currentFocus != null) imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
 
-                userPassword = "1s22s22p63s2";
-
                 if (userEmail.isEmpty()) {
                     emailField.setError("Email is required");
                     emailField.requestFocus();
@@ -69,7 +67,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (userPassword.isEmpty()) {
                     passwordField.setError("Password is required");
                     passwordField.requestFocus();
+                    return;
                 }
+
+                showProgressDialog();
 
                 // Use FirebaseAuth to sign in with email and password
                 mAuth.signInWithEmailAndPassword(userEmail, userPassword)
@@ -83,7 +84,10 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putBoolean("isLoggedIn", true);
+                                editor.putString("userEmail", userEmail);
                                 editor.apply();
+
+                                dismissProgressDialog();
 
                                 // Navigate to main activity or dashboard
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -101,7 +105,8 @@ public class LoginActivity extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showForgatePasswordDialog();
+                Intent intent = new Intent(LoginActivity.this, ForgetPassActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -114,31 +119,26 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void showForgatePasswordDialog() {
+
+    private void showProgressDialog() {
         // Inflate the custom layout
-        LayoutInflater inflater = LayoutInflater.from(LoginActivity.this);
-        View dialogView = inflater.inflate(R.layout.forget_password_dialog, null);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.progress_dialog, null);
 
-        // Get references to views in the layout
-        EditText forgatePassword = dialogView.findViewById(R.id.forgatePassword);
+        // Build the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder.setCancelable(false); // Prevent the dialog from being dismissed by the back button
 
-        // Build the AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setTitle("Forgate Password")
-                .setView(dialogView) // Set the custom layout
-                .setPositiveButton("Submit", (dialog, which) -> {
-                    // Retrieve user input
-                    String userInput = forgatePassword.getText().toString();
-                    if (!userInput.isEmpty()) {
-                        Toast.makeText(LoginActivity.this, "Enter a valid email!" + userInput, Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Email sent.", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> {
-                    dialog.dismiss();
-                });
-
-        builder.create().show();
+        // Create and show the dialog
+        progressDialog = builder.create();
+        progressDialog.show();
     }
+
+    private void dismissProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
 }

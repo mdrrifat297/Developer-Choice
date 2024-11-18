@@ -75,5 +75,21 @@
             android:text="Flash light" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/vibrateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/vidrateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open Vibrate"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

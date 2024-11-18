@@ -1,12 +1,14 @@
 package com.android.developerchoice;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -75,6 +77,9 @@ public class AccountActivity extends AppCompatActivity {
         String userName = "Md Rifat Rahman";
         String userAge = "17";
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("userEmail", "");
 
+        Toast.makeText(AccountActivity.this, userEmail, Toast.LENGTH_SHORT).show();
     }
 }

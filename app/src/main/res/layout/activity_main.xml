@@ -5,13 +5,13 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
+    android:fitsSystemWindows="false"
     tools:openDrawer="start"
     tools:context=".MainActivity">
 
     <include
         layout="@layout/main_content"
+        android:layout_marginTop="22dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -20,8 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
+        android:fitsSystemWindows="false"
         app:headerLayout="@layout/drawer_hader"
-        app:menu="@menu/drawer_menu"/>
+        app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

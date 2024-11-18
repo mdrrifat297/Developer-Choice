@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+
+import android.widget.Toolbar;
 import android.widget.VideoView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         ImageButton openNavigation = findViewById(R.id.openNavigation);
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         NavigationView  navigationView = findViewById(R.id.navigationView);
-        Button openNotification = findViewById(R.id.openNotification);
 
 
         // open  navigation drawer
@@ -68,15 +71,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        openNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showNotification();
-            }
-        });
 
-
-        // navigation item selected
+        // navigation drower item selected
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -110,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
     @Override
@@ -117,6 +114,14 @@ public class MainActivity extends AppCompatActivity {
         // Toast.makeText(MainActivity.this, "Exit", Toast.LENGTH_SHORT).show();
         super.onStop();
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = new MenuInflater(this);
+//        menuInflater.inflate(R.menu.appbar_menu, menu);
+//        return true;
+//    }
+
 
     // logout confram dialog
     private void showConfirmationDialog() {
