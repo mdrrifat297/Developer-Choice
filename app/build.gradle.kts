@@ -11,8 +11,8 @@ android {
         applicationId = "com.android.developerchoice"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.0.2"
+        versionCode = 3
+        versionName = "1.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,9 +34,11 @@ android {
 
 dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
-//    implementation("com.google.firebase:firebase-analytics:22.1.2")
-//    implementation("com.google.firebase:firebase-analytics-ktx:22.1.2")
-//    implementation("com.google.firebase:firebase-auth")
+//    implementation("com.arthenica:mobile-ffmpeg-full:4.4")
+//    implementation("androidx.appcompat:appcompat:1.6.1")
+//    implementation("androidx.core:core-ktx:1.10.1")
+//    implementation("com.karumi:dexter:6.2.3")
+
 
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -46,7 +48,7 @@ dependencies {
     implementation(libs.legacy.support.v4)
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.database)
-    // implementation(libs.play.services.ads)
+    implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

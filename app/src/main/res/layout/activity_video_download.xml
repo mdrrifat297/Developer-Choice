@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AdsActivity">
+    tools:context=".VideoDownloadActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -22,14 +22,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Google Ads"
+            android:text="Video Downloder"
             android:textSize="20dp"
             android:layout_marginLeft="30dp"
             android:textStyle="bold"/>
     </androidx.appcompat.widget.Toolbar>
 
-<!--    <com.google.android.gms.ads.AdView-->
-<!--        android:id="@+id/adView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
+
 </LinearLayout>

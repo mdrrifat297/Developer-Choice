@@ -16,7 +16,7 @@
             android:id="@+id/goBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/chevron_left_icon"
+            android:src="@drawable/left_arrow_icon"
             android:background="@android:color/transparent" />
 
         <TextView

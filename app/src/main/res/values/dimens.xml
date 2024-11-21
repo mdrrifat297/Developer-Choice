@@ -2,4 +2,21 @@
 <resources>
     <dimen name="toolbarTextSize">18sp</dimen>
     <dimen name="toolbarTextMarginLeft">16dp</dimen>
+
+    <dimen name="fivedp">5dp</dimen>
+    <dimen name="tendp">10dp</dimen>
+    <dimen name="fifteendp">15dp</dimen>
+    <dimen name="twentydp">20dp</dimen>
+    <dimen name="twentyfivedp">25dp</dimen>
+    <dimen name="thirtydp">30dp</dimen>
+    <dimen name="thirtyfivedp">35dp</dimen>
+    <dimen name="fortydp">40dp</dimen>
+    <dimen name="fortyfivedp">45dp</dimen>
+    <dimen name="fiftydp">50dp</dimen>
+    <dimen name="fiftyfivedp">55dp</dimen>
+    <dimen name="sixtydp">60dp</dimen>
+    <dimen name="sixtyfivedp">65dp</dimen>
+    <dimen name="seventydp">70dp</dimen>
+    <dimen name="seventyfivedp">75dp</dimen>
+    <dimen name="eightydp">80dp</dimen>
 </resources>

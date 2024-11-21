@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SensorActivity">
+    tools:context=".VideoConverterActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -22,82 +22,61 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sensor"
+            android:text="mp4 to mp3"
             android:textSize="20dp"
             android:layout_marginLeft="30dp"
             android:textStyle="bold"/>
     </androidx.appcompat.widget.Toolbar>
 
-
     <LinearLayout
-        android:id="@+id/sensorLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/accelerometerData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Accelerometer Data"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:id="@+id/proximityData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Proximity Data"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:id="@+id/lightData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Light Level Data"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/tourchLight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:orientation="vertical"
+        android:layout_marginTop="120dp"
         android:gravity="center">
 
         <TextView
+            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:padding="20dp"
-            android:text="Turn on/off your flash light"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Status"
+            android:textSize="16sp" />
 
-        <Switch
-            android:id="@+id/flashlightSwitch"
+        <ProgressBar
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Flash light" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/vibrateLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:gravity="center">
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 
         <Button
-            android:id="@+id/vidrateButton"
+            android:id="@+id/selectFile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Open Vibrate"/>
+            android:text="Select File"
+            android:layout_below="@id/status"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
 
+        <Button
+            android:id="@+id/convertFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Convert to MP3"
+            android:layout_below="@id/selectFile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/openFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play"
+            android:layout_below="@id/selectFile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
-
 
 </LinearLayout>

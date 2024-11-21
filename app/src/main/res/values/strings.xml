@@ -20,4 +20,5 @@
     <string name="edit_photo">Edit Photo</string>
     <string name="edit">Edit</string>
     <string name="save_data">Save Data</string>
+    <string name="dotdot">- - - - - - - - -</string>
 </resources>

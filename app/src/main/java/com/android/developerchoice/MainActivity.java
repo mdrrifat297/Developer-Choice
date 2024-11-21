@@ -25,6 +25,7 @@ import android.widget.Toolbar;
 import android.widget.VideoView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -62,12 +63,27 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         NavigationView  navigationView = findViewById(R.id.navigationView);
 
-
         // open  navigation drawer
         openNavigation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.open();
+            }
+        });
+
+        // go mp4 to mp3 converter
+        ((CardView) findViewById(R.id.mp4tomp3)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, VideoConverterActivity.class));
+            }
+        });
+
+        // video downloader
+        ((CardView) findViewById(R.id.videoDownloader)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, VideoDownloadActivity.class));
             }
         });
 

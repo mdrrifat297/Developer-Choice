@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -21,6 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar"
         tools:targetApi="31">
+        <activity
+            android:name=".VideoDownloadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VideoConverterActivity"
+            android:exported="false" />
         <activity
             android:name=".ForgetPassActivity"
             android:exported="false" />
