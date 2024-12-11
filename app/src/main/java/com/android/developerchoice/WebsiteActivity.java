@@ -37,7 +37,7 @@ public class WebsiteActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        webView.loadUrl("https://www.youtube.com/");
+        webView.loadUrl("https://mdrrifat297.github.io/Code-With-Rifat/index.html");
 
         webView.setWebViewClient(new WebViewClient() {
             @Override

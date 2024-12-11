@@ -112,8 +112,30 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:text="Don’t have an account? Sign Up"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/buttonBackground"
         android:textSize="14sp" />
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center">-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/continueWithGoogle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/google_icon"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:padding="10dp"/>-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/continueWithMicrosoft"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/microsoft_icon"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:padding="10dp"/>-->
+<!--    </LinearLayout>-->
 
 
 </LinearLayout>

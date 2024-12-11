@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+//import java.util.regex.Pattern;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +22,11 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class SingupActivity extends AppCompatActivity {
 
     private AlertDialog progressDialog;
+//    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,12 @@ public class SingupActivity extends AppCompatActivity {
                     return;
                 }
 
+//                if (!isValidEmail(userEmail)) {
+//                    emailField.setError("Invalid email address!");
+//                    emailField.requestFocus();
+//                    return;
+//                }
+
                 showProgressDialog();
 
                 // keyboard dismiss
@@ -113,6 +122,10 @@ public class SingupActivity extends AppCompatActivity {
             }
         });
     }
+
+//    public static boolean isValidEmail(String email) {
+//        return Pattern.matches(EMAIL_REGEX, email);
+//    }
 
     private void showProgressDialog() {
         // Inflate the custom layout
