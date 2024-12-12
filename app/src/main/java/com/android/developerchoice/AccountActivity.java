@@ -1,5 +1,6 @@
 package com.android.developerchoice;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -26,12 +29,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AccountActivity extends AppCompatActivity {
 
     private static final int GALLERY_REQ_CODE = 1000;
-    TextView userPhotoUplode;
+    TextView userPhotoUplode, editUserName, editUserEmail, editUserDob, editUserLocation;
     ImageView userPhoto;
     private DatabaseReference usersRef;
     String userName, name, dob, email, location, profile, updateName, updateDob, updateLocation, updateProfile;
@@ -80,10 +85,46 @@ public class AccountActivity extends AppCompatActivity {
             startActivityForResult(iGallery, GALLERY_REQ_CODE);
         });
 
+        // Edit user name
+        editUserName = findViewById(R.id.editUserName);
+        editUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateInformation("name");
+            }
+        });
+
+        // Edit user email
+        editUserEmail = findViewById(R.id.editUserEmail);
+        editUserEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateInformation("email");
+            }
+        });
+
+        // Edit user dob
+        editUserDob = findViewById(R.id.editUserDob);
+        editUserDob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateInformation("dob");
+            }
+        });
+
+        // Edit user location
+        editUserLocation = findViewById(R.id.editUserLocation);
+        editUserLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateInformation("location");
+            }
+        });
+
         saveDataToDarabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uplodeDataOnFirebase();
+                updateUserData(userName, name, dob, email, location, profile);
             }
         });
     }
@@ -133,7 +174,62 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     // update user data
-    public void uplodeDataOnFirebase() {
+    private void updateUserData(String username, String name, String dob, String email, String location, String profileImg) {
+        // Reference to the user's data in the database
+        DatabaseReference userRef = usersRef.child(username);
 
+        // Create a map with the updated user data
+        Map<String, Object> userUpdates = new HashMap<>();
+        userUpdates.put("name", name);
+        userUpdates.put("date_of_birth", dob);
+        userUpdates.put("email", email);
+        userUpdates.put("location", location);
+        userUpdates.put("profile_img", profileImg);
+
+        // Update the user data in Firebase
+        userRef.updateChildren(userUpdates).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(AccountActivity.this, "User data updated successfully", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(AccountActivity.this, "Failed to update data", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("Firebase", "Error updating data: " + e.getMessage());
+            Toast.makeText(AccountActivity.this, "Error updating data", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    // user data update dialog
+    private void updateInformation(String type) {
+        final EditText input = new EditText(AccountActivity.this);
+        input.setHint("Enter new data...");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AccountActivity.this);
+        builder.setTitle("Input Dialog")
+                .setMessage("")
+                .setView(input)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String userInput = input.getText().toString();
+
+                        if (type == "name") {
+                            name = userInput;
+                            ((TextView) findViewById(R.id.userName)).setText(name);
+                        } else if (type == "email") {
+                            email = userInput;
+                            ((TextView) findViewById(R.id.userEmail)).setText(email);
+                        } else if (type == "dob") {
+                            dob = userInput;
+                            ((TextView) findViewById(R.id.userDob)).setText(dob);
+                        } else if (type == "location") {
+                            location = userInput;
+                            ((TextView) findViewById(R.id.userLocation)).setText(location);
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", null);
+
+        builder.create().show();
     }
 }

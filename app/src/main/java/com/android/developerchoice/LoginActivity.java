@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         TextView forgotPassword = findViewById(R.id.forgotPassword);
         TextView signUpText = findViewById(R.id.signUpText);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//        Button continueWithGoogle = findViewById(R.id.continueWithGoogle);
-//        Button continueWithMicrosoft = findViewById(R.id.continueWithMicrosoft);
+        ImageButton continueWithGoogle = findViewById(R.id.continueWithGoogle);
+        ImageButton continueWithMicrosoft = findViewById(R.id.continueWithMicrosoft);
 
         // continue with email and password
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -125,20 +126,20 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // continue with google
-//        continueWithGoogle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        continueWithGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "Google", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // continue with microsoft
-//        continueWithMicrosoft.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        continueWithMicrosoft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "Microsoft", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showProgressDialog() {
