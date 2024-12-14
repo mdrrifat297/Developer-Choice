@@ -3,6 +3,8 @@ package com.android.developerchoice;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +41,7 @@ public class AccountActivity extends AppCompatActivity {
     private static final int GALLERY_REQ_CODE = 1000;
     TextView userPhotoUplode, editUserName, editUserEmail, editUserDob, editUserLocation;
     ImageView userPhoto;
+    EditText editTextInput;
     private DatabaseReference usersRef;
     String userName, name, dob, email, location, profile, updateName, updateDob, updateLocation, updateProfile;
 
@@ -90,6 +94,7 @@ public class AccountActivity extends AppCompatActivity {
         editUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                editTextInput.setText(name);
                 updateInformation("name");
             }
         });
@@ -99,6 +104,7 @@ public class AccountActivity extends AppCompatActivity {
         editUserEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                editTextInput.setText(email);
                 updateInformation("email");
             }
         });
@@ -108,6 +114,7 @@ public class AccountActivity extends AppCompatActivity {
         editUserDob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                editTextInput.setText(dob);
                 updateInformation("dob");
             }
         });
@@ -117,6 +124,7 @@ public class AccountActivity extends AppCompatActivity {
         editUserLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                editTextInput.setText(location);
                 updateInformation("location");
             }
         });
@@ -201,35 +209,46 @@ public class AccountActivity extends AppCompatActivity {
 
     // user data update dialog
     private void updateInformation(String type) {
-        final EditText input = new EditText(AccountActivity.this);
-        input.setHint("Enter new data...");
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_edit_data, null);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AccountActivity.this);
-        builder.setTitle("Input Dialog")
-                .setMessage("")
-                .setView(input)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String userInput = input.getText().toString();
+        editTextInput = dialogView.findViewById(R.id.editTextInput);
+        Button buttonCancle = dialogView.findViewById(R.id.buttonCancle);
+        Button buttonOk = dialogView.findViewById(R.id.buttonOk);
 
-                        if (type == "name") {
-                            name = userInput;
-                            ((TextView) findViewById(R.id.userName)).setText(name);
-                        } else if (type == "email") {
-                            email = userInput;
-                            ((TextView) findViewById(R.id.userEmail)).setText(email);
-                        } else if (type == "dob") {
-                            dob = userInput;
-                            ((TextView) findViewById(R.id.userDob)).setText(dob);
-                        } else if (type == "location") {
-                            location = userInput;
-                            ((TextView) findViewById(R.id.userLocation)).setText(location);
-                        }
-                    }
-                })
-                .setNegativeButton("Cancel", null);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create();
 
-        builder.create().show();
+        buttonCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userInput = editTextInput.getText().toString();
+
+                if (type == "name") {
+                    name = userInput;
+                    ((TextView) findViewById(R.id.userName)).setText(name);
+                } else if (type == "email") {
+                    email = userInput;
+                    ((TextView) findViewById(R.id.userEmail)).setText(email);
+                } else if (type == "dob") {
+                    dob = userInput;
+                    ((TextView) findViewById(R.id.userDob)).setText(dob);
+                } else if (type == "location") {
+                    location = userInput;
+                    ((TextView) findViewById(R.id.userLocation)).setText(location);
+                }
+                dialog.dismiss();
+            }
+        });
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }
