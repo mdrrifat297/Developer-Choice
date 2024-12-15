@@ -43,7 +43,7 @@ public class AccountActivity extends AppCompatActivity {
     ImageView userPhoto;
     EditText editTextInput;
     private DatabaseReference usersRef;
-    String userName, name, dob, email, location, profile, updateName, updateDob, updateLocation, updateProfile;
+    String userName, name, dob, email, location, profile="", updateName, updateDob, updateLocation, updateProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

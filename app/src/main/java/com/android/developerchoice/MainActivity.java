@@ -100,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 else if (itemID == R.id.drawerSQLite)
                     startActivity(new Intent(MainActivity.this, SQLiteActivity.class));
 
+                else if (itemID == R.id.drawerTextStorage)
+                    startActivity(new Intent(MainActivity.this, TextActivity.class));
+
                 else if (itemID == R.id.drawerSensor)
                     startActivity(new Intent(MainActivity.this, SensorActivity.class));
 

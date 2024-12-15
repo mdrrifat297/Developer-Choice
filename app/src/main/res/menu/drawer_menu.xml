@@ -16,6 +16,11 @@
             android:icon="@drawable/dataset_icon"/>
 
         <item
+            android:id="@+id/drawerTextStorage"
+            android:title="Text Storage"
+            android:icon="@drawable/dataset_icon"/>
+
+        <item
             android:id="@+id/drawerSensor"
             android:title="Sensor"
             android:icon="@drawable/sensor_icon"/>
