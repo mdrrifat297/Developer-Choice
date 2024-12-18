@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -37,7 +36,7 @@ public class WebsiteActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        webView.loadUrl("https://mdrrifat297.github.io/Code-With-Rifat/index.html");
+        webView.loadUrl("https://codewithrifat.netlify.app/");
 
         webView.setWebViewClient(new WebViewClient() {
             @Override

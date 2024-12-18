@@ -105,7 +105,7 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                editTextInput.setText(email);
-                updateInformation("email");
+//                updateInformation("email");
             }
         });
 

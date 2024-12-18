@@ -34,12 +34,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <EditText
-            android:id="@+id/textDataIO"
+            android:id="@+id/largeTextInput"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:layout_margin="20dp"
-            android:background="#fff"/>
+            android:background="@drawable/rounded_edittext"
+            android:textColor="@color/black"
+            android:inputType="textMultiLine"
+            android:gravity="top|start"
+            android:scrollbars="vertical" />
+
 
         <Button
             android:id="@+id/taxtDataSave"
